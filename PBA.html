@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sarawak Tour Packages</title>
+ 
+  <!-- jQuery Mobile CSS -->
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ 
+  <!-- jQuery & jQuery Mobile JS -->
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+  <style>
+    :root {
+      --primary: #0284c7;
+      --bg-color: #f8fafc;
+      --text-dark: #1e293b;
+      --text-muted: #64748b;
+    }
+
+    .ui-page {
+      font-family: 'Plus Jakarta Sans', sans-serif !important;
+      background-color: var(--bg-color) !important;
+    }
+
+    /* Restrict content width so images and cards don't over-expand on big screens */
+    .ui-content {
+      max-width: 600px !important;
+      margin: 0 auto !important;
+      padding: 16px !important;
+    }
+
+    /* Header & Navigation Bar */
+    .custom-header {
+      background: #0f172a !important;
+      border: none !important;
+      color: white !important;
+      padding: 12px 0 0 0 !important;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .custom-header h1 {
+      font-weight: 800 !important;
+      font-size: 1.25rem !important;
+      color: white !important;
+      text-shadow: none !important;
+      margin: 0 0 10px 0 !important;
+    }
+
+    .custom-navbar .ui-btn {
+      background-color: #1e293b !important;
+      color: #94a3b8 !important;
+      border: none !important;
+      text-shadow: none !important;
+      font-weight: 600 !important;
+      font-size: 0.8rem !important;
+      padding: 10px 5px !important;
+    }
+
+    .custom-navbar .ui-btn-active {
+      background-color: var(--primary) !important;
+      color: white !important;
+    }
+
+    /* Hero Card */
+    .hero-card {
+      background: linear-gradient(135deg, #0284c7, #0f172a);
+      color: white;
+      padding: 30px 20px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(2, 132, 199, 0.2);
+      margin-bottom: 25px;
+    }
+
+    .hero-card h2 {
+      font-weight: 800 !important;
+      color: white !important;
+      text-shadow: none !important;
+      font-size: 1.6rem !important;
+      margin-top: 0 !important;
+    }
+
+    .hero-card p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+
+    /* Card & Image Fixed Dimensions */
+    .tour-card {
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      margin-bottom: 24px;
+      border: 1px solid #f1f5f9;
+    }
+
+    .tour-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .tour-card-body {
+      padding: 18px;
+    }
+
+    .tour-card-body h3 {
+      margin: 0 0 8px 0 !important;
+      font-size: 1.25rem !important;
+      color: var(--text-dark) !important;
+      font-weight: 700 !important;
+    }
+
+    .tour-card-body p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+    /* Interactive Buttons & Boxes */
+    .info-btn-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .info-toggle-btn {
+      flex: 1;
+      background: #f1f5f9 !important;
+      color: var(--text-dark) !important;
+      border: none !important;
+      border-radius: 12px !important;
+      font-size: 0.8rem !important;
+      font-weight: 600 !important;
+      text-shadow: none !important;
+      padding: 10px !important;
+      margin: 0 !important;
+    }
+
+    .info-box {
+      background: #eff6ff;
+      border-radius: 12px;
+      padding: 12px 15px;
+      font-size: 0.85rem;
+      color: #1e40af;
+      margin-top: 12px;
+      display: none;
+      line-height: 1.4;
+    }
+
+    .info-box.highlight {
+      background: #fffbebf5;
+      color: #92400e;
+      border: 1px solid #fef3c7;
+    }
+
+    /* Form Container */
+    .form-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      border: 1px solid #f1f5f9;
+    }
+
+    .form-card h2 {
+      font-size: 1.3rem !important;
+      font-weight: 700 !important;
+      color: var(--text-dark) !important;
+      margin-top: 0 !important;
+      text-align: center;
+    }
+
+    .ui-input-text, .ui-select {
+      border-radius: 12px !important;
+      border: 1px solid #e2e8f0 !important;
+      background: #f8fafc !important;
+      box-shadow: none !important;
+    }
+
+    .btn-primary-custom {
+      background: var(--primary) !important;
+      color: white !important;
+      border: none !important;
+      border-radius: 12px !important;
+      text-shadow: none !important;
+      font-weight: 700 !important;
+      padding: 14px !important;
+      font-size: 0.95rem !important;
+      margin-top: 15px !important;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3) !important;
+    }
+
+    .error-msg {
+      color: #ef4444;
+      font-size: 0.8rem;
+      margin-top: 5px;
+      display: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HOME PAGE -->
+  <div data-role="page" id="home">
+    <div data-role="header" class="custom-header" data-position="fixed" data-tap-toggle="false">
+      <h1><i class="fa-solid fa-compass text-warning me-2"></i> Sarawak Tours</h1>
+      <div data-role="navbar" class="custom-navbar">
+        <ul>
+          <li><a href="#home" data-transition="fade" class="ui-btn-active"><i class="fa-solid fa-house"></i><br>Home</a></li>
+          <li><a href="#packages" data-transition="fade"><i class="fa-solid fa-map-location-dot"></i><br>Packages</a></li>
+          <li><a href="#booking" data-transition="fade"><i class="fa-solid fa-calendar-check"></i><br>Booking</a></li>
+          <li><a href="#contact" data-transition="fade"><i class="fa-solid fa-envelope"></i><br>Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div role="main" class="ui-content">
+      <div class="hero-card">
+        <img src="laman utama.jpg" alt="Sarawak Waterfront" class="hero-img">
+        <h2>Welcome to Sarawak!</h2>
+        <p>Ready for your next trip? Discover cave explorations, rainforest adventures, and rich cultural heritage across Sarawak.</p>
+        <a href="#packages" data-transition="fade" class="ui-btn btn-primary-custom">Explore Packages <i class="fa-solid fa-arrow-right ms-1"></i></a>
+      </div>
+
+      <div style="text-align: center; padding: 10px;">
+        <h4 style="color: var(--text-dark); font-weight: 700;">Why book with us?</h4>
+        <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.6;">
+          Easy and fast online booking<br>
+          Licensed local tour guides<br>
+          Authentic Sarawak experiences
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PACKAGES PAGE -->
+  <div data-role="page" id="packages">
+    <div data-role="header" class="custom-header" data-position="fixed" data-tap-toggle="false">
+      <h1>Tour Packages</h1>
+      <div data-role="navbar" class="custom-navbar">
+        <ul>
+          <li><a href="#home" data-transition="fade"><i class="fa-solid fa-house"></i><br>Home</a></li>
+          <li><a href="#packages" data-transition="fade" class="ui-btn-active"><i class="fa-solid fa-map-location-dot"></i><br>Packages</a></li>
+          <li><a href="#booking" data-transition="fade"><i class="fa-solid fa-calendar-check"></i><br>Booking</a></li>
+          <li><a href="#contact" data-transition="fade"><i class="fa-solid fa-envelope"></i><br>Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div role="main" class="ui-content">
+      <!-- Package 1 -->
+      <div class="tour-card">
+        <img src="Gua Niah.jpeg" alt="Gua Niah">
+        <div class="tour-card-body">
+          <h3>Gua Niah Expedition</h3>
+          <p>Discover prehistoric cave paintings, ancient burial sites, and massive limestone caverns.</p>
+         
+          <div class="info-btn-group">
+            <button onclick="toggleBox('niahDetails', 'niahHighlights')" class="ui-btn info-toggle-btn"><i class="fa-regular fa-clock me-1"></i> Quick Details</button>
+            <button onclick="toggleBox('niahHighlights', 'niahDetails')" class="ui-btn info-toggle-btn"><i class="fa-solid fa-star text-warning me-1"></i> Highlights</button>
+          </div>
+
+          <div id="niahDetails" class="info-box">
+            <i class="fa-solid fa-circle-info me-1"></i> <strong>Duration:</strong> Full Day (10 Hours)<br>
+            <i class="fa-solid fa-tag me-1"></i> <strong>Price:</strong> RM 280 / person
+          </div>
+
+          <div id="niahHighlights" class="info-box highlight">
+            <i class="fa-solid fa-check me-1"></i> <strong>Includes:</strong> Great Cave & Painted Cave trek, river boat transfer, park entry permit, and packed lunch.
+          </div>
+
+          <a href="#booking" data-transition="fade" class="ui-btn btn-primary-custom" style="margin-top: 12px !important;">Book This Tour</a>
+        </div>
+      </div>
+
+      <!-- Package 2 -->
+      <div class="tour-card">
+        <img src="Taman Negara Bako.jpeg" alt="Bako Park">
+        <div class="tour-card-body">
+          <h3>Bako National Park Trek</h3>
+          <p>Encounter rare Proboscis monkeys, ancient coastal sea stacks, and vibrant jungle trails.</p>
+         
+          <div class="info-btn-group">
+            <button onclick="toggleBox('bakoDetails', 'bakoHighlights')" class="ui-btn info-toggle-btn"><i class="fa-regular fa-clock me-1"></i> Quick Details</button>
+            <button onclick="toggleBox('bakoHighlights', 'bakoDetails')" class="ui-btn info-toggle-btn"><i class="fa-solid fa-star text-warning me-1"></i> Highlights</button>
+          </div>
+
+          <div id="bakoDetails" class="info-box">
+            <i class="fa-solid fa-circle-info me-1"></i> <strong>Duration:</strong> Full Day (8 Hours)<br>
+            <i class="fa-solid fa-tag me-1"></i> <strong>Price:</strong> RM 200 / person
+          </div>
+
+          <div id="bakoHighlights" class="info-box highlight">
+            <i class="fa-solid fa-check me-1"></i> <strong>Includes:</strong> Boat transfers, licensed park guide, trail fees, and lunch box.
+          </div>
+
+          <a href="#booking" data-transition="fade" class="ui-btn btn-primary-custom" style="margin-top: 12px !important;">Book This Tour</a>
+        </div>
+      </div>
+
+      <!-- Package 3 -->
+      <div class="tour-card">
+        <img src="Sarawak Culture Village.jpeg" alt="Cultural Village">
+        <div class="tour-card-body">
+          <h3>Sarawak Cultural Village</h3>
+          <p>Step inside an award-winning living museum representing Sarawak's diverse ethnic tribes.</p>
+         
+          <div class="info-btn-group">
+            <button onclick="toggleBox('scvDetails', 'scvHighlights')" class="ui-btn info-toggle-btn"><i class="fa-regular fa-clock me-1"></i> Quick Details</button>
+            <button onclick="toggleBox('scvHighlights', 'scvDetails')" class="ui-btn info-toggle-btn"><i class="fa-solid fa-star text-warning me-1"></i> Highlights</button>
+          </div>
+
+          <div id="scvDetails" class="info-box">
+            <i class="fa-solid fa-circle-info me-1"></i> <strong>Duration:</strong> Half Day (4 Hours)<br>
+            <i class="fa-solid fa-tag me-1"></i> <strong>Price:</strong> RM 120 / person
+          </div>
+
+          <div id="scvHighlights" class="info-box highlight">
+            <i class="fa-solid fa-check me-1"></i> <strong>Includes:</strong> Cultural dance shows, ethnic longhouse tours, and souvenir voucher.
+          </div>
+
+          <a href="#booking" data-transition="fade" class="ui-btn btn-primary-custom" style="margin-top: 12px !important;">Book This Tour</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOKING PAGE -->
+  <div data-role="page" id="booking">
+    <div data-role="header" class="custom-header" data-position="fixed" data-tap-toggle="false">
+      <h1>Booking Form</h1>
+      <div data-role="navbar" class="custom-navbar">
+        <ul>
+          <li><a href="#home" data-transition="fade"><i class="fa-solid fa-house"></i><br>Home</a></li>
+          <li><a href="#packages" data-transition="fade"><i class="fa-solid fa-map-location-dot"></i><br>Packages</a></li>
+          <li><a href="#booking" data-transition="fade" class="ui-btn-active"><i class="fa-solid fa-calendar-check"></i><br>Booking</a></li>
+          <li><a href="#contact" data-transition="fade"><i class="fa-solid fa-envelope"></i><br>Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div role="main" class="ui-content">
+      <div class="form-card">
+        <h2>Reserve Your Spot</h2>
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px;">Fill out the form below to plan your trip.</p>
+       
+        <form id="bookingForm">
+          <label for="bookName" style="font-weight: 600;">Full Name:</label>
+          <input type="text" id="bookName" placeholder="e.g. John Doe">
+
+          <label for="bookPhone" style="font-weight: 600;">Phone Number:</label>
+          <input type="tel" id="bookPhone" placeholder="e.g. +60 12-345 6789">
+
+          <label for="bookEmail" style="font-weight: 600;">Email Address:</label>
+          <input type="email" id="bookEmail" placeholder="e.g. john@example.com">
+
+          <label for="travelDate" style="font-weight: 600;">Travel Date:</label>
+          <input type="date" id="travelDate">
+
+          <label for="participants" style="font-weight: 600;">Number of Guests:</label>
+          <input type="number" id="participants" min="1" value="1">
+
+          <label for="packageSelect" style="font-weight: 600;">Select Your Package:</label>
+          <select id="packageSelect">
+            <option value="Gua Niah Expedition">Gua Niah Expedition</option>
+            <option value="Bako National Park Trek">Bako National Park Trek</option>
+            <option value="Sarawak Cultural Village">Sarawak Cultural Village</option>
+          </select>
+
+          <button type="button" onclick="handleBookingSubmit()" class="ui-btn btn-primary-custom">Confirm Booking <i class="fa-solid fa-check-circle ms-1"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT US PAGE -->
+  <div data-role="page" id="contact">
+    <div data-role="header" class="custom-header" data-position="fixed" data-tap-toggle="false">
+      <h1>Contact Us</h1>
+      <div data-role="navbar" class="custom-navbar">
+        <ul>
+          <li><a href="#home" data-transition="fade"><i class="fa-solid fa-house"></i><br>Home</a></li>
+          <li><a href="#packages" data-transition="fade"><i class="fa-solid fa-map-location-dot"></i><br>Packages</a></li>
+          <li><a href="#booking" data-transition="fade"><i class="fa-solid fa-calendar-check"></i><br>Booking</a></li>
+          <li><a href="#contact" data-transition="fade" class="ui-btn-active"><i class="fa-solid fa-envelope"></i><br>Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div role="main" class="ui-content">
+      <div class="form-card">
+        <h2>We'd Love to Help!</h2>
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px;">Have questions? Send us a message anytime.</p>
+       
+        <form id="contactForm" onsubmit="return validateContactForm(event)">
+          <label for="contactName" style="font-weight: 600;">Name:</label>
+          <input type="text" id="contactName" placeholder="Your full name">
+          <div id="nameError" class="error-msg"><i class="fa-solid fa-circle-exclamation me-1"></i> Please enter your name.</div>
+
+          <label for="contactEmail" style="font-weight: 600;">Email:</label>
+          <input type="email" id="contactEmail" placeholder="yourname@email.com">
+          <div id="emailError" class="error-msg"><i class="fa-solid fa-circle-exclamation me-1"></i> Please enter a valid email address.</div>
+
+          <label for="contactMessage" style="font-weight: 600;">Message:</label>
+          <textarea id="contactMessage" placeholder="Type your message here..."></textarea>
+          <div id="messageError" class="error-msg"><i class="fa-solid fa-circle-exclamation me-1"></i> Message field cannot be blank.</div>
+
+          <div style="margin-top: 15px; background: #f8fafc; padding: 12px; border-radius: 12px; border: 1px solid #e2e8f0;">
+            <label style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">
+              <input type="checkbox" id="ethicalConsent"> I agree to the privacy policy & responsible use of my submitted info.
+            </label>
+          </div>
+          <div id="consentError" class="error-msg"><i class="fa-solid fa-circle-exclamation me-1"></i> Please check the consent box before sending.</div>
+
+          <button type="submit" class="ui-btn btn-primary-custom">Send Message <i class="fa-solid fa-paper-plane ms-1"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleBox(showId, hideId) {
+      $('#' + hideId).hide();
+      $('#' + showId).slideToggle(200);
+    }
+
+    function handleBookingSubmit() {
+      alert("Thank you! Your tour reservation has been submitted successfully. We will contact you soon.");
+      $('#bookingForm')[0].reset();
+    }
+
+    function validateContactForm(event) {
+      event.preventDefault();
+
+      let isValid = true;
+      const name = $('#contactName').val().trim();
+      const email = $('#contactEmail').val().trim();
+      const message = $('#contactMessage').val().trim();
+      const consent = $('#ethicalConsent').is(':checked');
+
+      $('.error-msg').hide();
+
+      if (!name) {
+        $('#nameError').show();
+        isValid = false;
+      }
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailPattern.test(email)) {
+        $('#emailError').show();
+        isValid = false;
+      }
+
+      if (!message) {
+        $('#messageError').show();
+        isValid = false;
+      }
+
+      if (!consent) {
+        $('#consentError').show();
+        isValid = false;
+      }
+
+      if (isValid) {
+        alert("Message Sent! Thank you for reaching out to Sarawak Tours.");
+        $('#contactForm')[0].reset();
+      }
+
+      return isValid;
+    }
+  </script>
+</body>
+</html>
